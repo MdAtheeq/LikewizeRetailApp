@@ -1,0 +1,231 @@
+﻿@model IEnumerable<LikewizeRetailApp.Models.BrandReport.BrandReport>
+@{
+    ViewBag.Title = "GetBrands";
+}
+
+<h2>Get Brand Report</h2>
+<br />
+
+
+<!--<div>
+    <canvas id="barchart"></canvas>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script>
+    var barCanvas = document.getElementById("barchart");
+
+    var count = [];
+    var brand = [];-->
+@*@foreach(var item in Model)
+       {
+    @:brand.push(@item.Brand);
+    @:count.push(@item.Count);
+       }*@
+
+<!--var brand = {
+        label: ['Brand'],
+        data: [20],
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderWidth: 0,
+        lineTension: 0,
+    }
+
+    var datasetvalues = {
+        labels: ['Brand'],//x-axis label values
+        datasets: [20]//y-axis
+    };
+
+    var chartOptions = {
+        scales: {
+            xAxes: [{
+                barPercentage: 1,//Percent (0-1) of the available width each bar should
+                categoryPercentage: 0.6,//Percent (0-1) of the available width each category
+            }],
+            yAxes: [{
+                barPercentage: 1,
+                categoryPercentage: 0.6,
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+        }
+    };
+    var barChart = new Chart(barCanvas, {
+        type: 'bar',
+        data: datasetvalues,
+        options: chartOptions
+    });
+
+</script>-->
+@*<!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <title>Index</title>
+    </head>
+    <body>
+        <div id="chartContainer"></div>
+
+        <script type="text/javascript">
+
+            window.onload = function () {
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    theme: "light2",
+                    animationEnabled: true,
+                    title: {
+                        text: "Simple Column Chart in ASP.NET MVC"
+                    },
+                    subtitles: [
+                        { text: "Try Resizing the Browser" }
+                    ],
+                    data: [
+                    {
+                        type: "column", //change type to bar, line, area, pie, etc
+                        //dataPoints: [
+                        //{ x: 10, y: 71 },
+                        //{ x: 20, y: 55 },
+                        //{ x: 30, y: 50 },
+                        //{ x: 40, y: 65 },
+                        //{ x: 50, y: 95 },
+                        //{ x: 60, y: 68 },
+                        //{ x: 70, y: 28 },
+                        //{ x: 80, y: 34 },
+                        //{ x: 90, y: 14 }
+                        //]
+                                            //Uncomment below line to add data coming from the controller.
+                        dataPoints: @Html.Raw(ViewBag.Brand),
+                    }
+                    ]
+                });
+                chart.render();
+            };
+        </script>
+
+    </body>
+    </html>*@
+
+
+
+
+
+
+
+@*<!DOCTYPE html>
+
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <title>Index</title>
+    </head>
+    <body>
+
+         @{
+            var data = Model;
+            var myChart = new Chart(width: 600, height: 400, theme: ChartTheme.Green).AddTitle("Brand Count").DataBindTable(dataSource: data, xField: "Brand").Write();
+          }
+
+    </body>
+    </html>*@
+
+
+
+
+
+@*<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>*@
+
+
+
+
+
+
+@*<input id="ID" value="Get Graph" type="button" />*@
+
+
+
+<div>
+    <canvas id="myChart1"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $.ajax({
+            type: 'POST',
+            url: "/Reports/GetBrandChart",
+            data: "",
+            contextType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccessResult,
+            error: OnError
+
+        });
+
+        function OnSuccessResult(data) {
+            var _data = data;
+
+            var _chartLabels = _data.map(x => x.Brand);
+            var _chartData = _data.map(x => x.Count);
+            
+
+            var grapharea = document.getElementById('myChart1').getContext("2d");
+            //const ctx = document.getElementById('myChart1');
+            let chartStatus = Chart.getChart("myChart1");
+            if (chartStatus != undefined) { chartStatus.destroy(); }
+
+            var myChart = new Chart(grapharea, {
+                type: "bar",
+                data: {
+                    labels: _chartLabels,
+                    datasets: [{
+                        backgroundColor: "Blue",
+                        data: _chartData
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+
+            });
+
+
+
+
+        }
+
+        function OnError(err) {
+
+        }
+    })
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

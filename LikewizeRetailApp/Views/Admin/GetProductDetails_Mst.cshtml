@@ -1,0 +1,257 @@
+﻿@model IPagedList<LikewizeRetailApp.Models.ProductDetails>
+@{
+    ViewBag.Title = "GetProductDetails_Mst";
+
+}
+
+@*<h2>GetProductDetails_Mst</h2>*@
+<body>
+    <h2>Product Details</h2>
+
+    @using PagedList.Mvc;
+    @using PagedList;
+
+    @*@Scripts.Render("~/Scripts/Custom.js")*@
+
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script>
+        $(document).ready(function () {
+            $("#ProductType").change(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetBrand","ReceivingOperations")',
+                    data: { prodType: $("#ProductType").val() },
+                    success: function (data) {
+                        $("#Brand").empty();
+                        $.each(data, function (i, brand) {
+                            $("#Brand").append('<option value="' + brand.Value + '" > ' + brand.Text + '</option>')
+                        })
+                    }
+                })
+            })
+        })
+        </script>
+
+        <script>
+        $(document).ready(function () {
+            $("#Brand").change(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetModel", "ReceivingOperations")',
+                    data: { prodType: $("#ProductType").val(), brand: $("#Brand").val() },
+                    success: function (data) {
+                        $("#Model").empty();
+                        $.each(data, function (i, model) {
+                            $("#Model").append('<option value="' + model.Value + '" > ' + model.Text + '</option>')
+                        })
+                    }
+                })
+            })
+        })
+        </script>
+    <script>
+        function PageValidation() {
+            var prod = $("#ProductType").val();
+            var brand = $("#Brand").val();
+            var message = $("#spanmsg");
+            console.log(prod);
+            if (brand == null) {
+                message.html("Please select a valid brand");
+                message.css("color", "red");
+            }
+            if (brand == null) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    </script>
+    @*<script src="~/Scripts/Custom.js"></script>*@
+
+
+
+    @*<script type="text/javascript">
+            $(function () {
+
+                $('body').on('click', '.modal-link', function (e) {
+                    e.preventDefault();
+
+
+
+
+                    $("#modal-container").remove();
+
+                    $.get($(this).data("targeturl"), function (data) {
+
+
+                        var x = $('body').find('#modal-container')
+                        x.append($('<div id="modal-container" class="modal fade">' + '<div class="modal-dialog" id="modaldialog">' +
+                            '<div class="modal-content" id= "modalbody" >' +
+                            data + '</div></div>').modal());
+
+
+
+                        //$('<div id="modal-container" class="modal fade">' + '<div class="modal-dialog" id="modaldialog">' +
+                        //    '<div class="modal-content" id= "modalbody" >' +
+                        //    data + '</div></div>').modal();
+
+                    });
+                });
+           });
+
+        </script>*@
+
+
+
+
+
+
+@*<script>
+            var AddProduct = function () {
+                $("#productModalBody").load("/Admin/CreateProductDetails_Mst", function () {
+                    $("#add-product").modal("show");
+                    $("#ProductType").change(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetBrand","ReceivingOperations")',
+                    data: { prodType: $("#ProductType").val() },
+                    success: function (data) {
+                        $("#Brand").empty();
+                        $.each(data, function (i, brand) {
+                            $("#Brand").append('<option value="' + brand.Value + '" > ' + brand.Text + '</option>')
+                        })
+                    }
+                })
+            })
+                })
+            }
+</script>*@
+
+
+
+
+
+    <style>
+        .modal-content {
+            padding: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .submitbutton {
+            position: relative;
+            bottom: 34px;
+            left: 310px;
+        }
+    </style>
+
+
+    @using (Html.BeginForm("GetProductDetails_Mst", "Admin", new { id = 1 }, FormMethod.Get))
+    {
+
+
+
+        <div>
+
+
+            <div>
+                <b>Select a product type:</b>
+                <div>
+                    @Html.DropDownList("ProductType", new SelectList(ViewBag.ProductTypeList, "Text", "Value"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div>
+                <b>Select a brand:</b>
+                <div>
+                    @Html.DropDownList("Brand", new SelectList(string.Empty, "Value", "Text"), new { @class = "form-control" })
+
+
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary submitbutton" onclick="return PageValidation();"><i class="fa-brands fa-1.5x fa-searchengin"></i></button>
+            <span id="spanmsg"></span>
+
+        </div>
+    }
+
+
+    <br />
+    <table id="ProductDetailsID" class="table table-bordered table-striped">
+        <tr>
+
+            <th>Product Details ID</th>
+            <th>Product Type</th>
+            <th>Brand</th>
+            <th>Model</th>
+
+
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductDetailsID</td>
+
+                <td> @item.ProductType</td>
+
+                <td>@item.Brand</td>
+
+                <td>@item.Model</td>
+
+                <td>
+                    @*<button type="button" class="btn btn-info modal-link" data-targeturl="@Url.Action("UpdateProductDetails_Mst","Admin", new {@prodID= item.ProductDetailsID})"><i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit</button>  |*@
+
+                    <a href="@Url.Action("UpdateProductDetails_Mst","Admin", new { @prodId = item.ProductDetailsID })" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit</a>  |
+                    <a href="@Url.Action("DeleteProductDetails_Mst","Admin", new { @prodId = item.ProductDetailsID })" class="btn btn-danger"><i class="fa-solid fa-trash"></i> &nbsp; Delete</a>
+                </td>
+
+            </tr>
+
+        }
+
+
+    </table>
+
+    <center>@Html.PagedListPager(Model, id => Url.Action("GetProductDetails_Mst", "Admin", new { id, ProductType = Request.QueryString["ProductType"], Brand = Request.QueryString["Brand"] }))</center>
+
+    @*<button type="button" class="btn btn-warning modal-link" data-targeturl="@Url.Action("CreateProductDetails_Mst","Admin")"><i class="fa-solid fa-square-plus"></i>&nbsp; Add New Product</button>*@
+    @*<button type="button" class="btn btn-warning" onclick="AddProduct()"><i class="fa-solid fa-square-plus"></i>&nbsp; Add New Product</button>*@
+    
+
+
+
+    <a href="@Url.Action("CreateProductDetails_Mst", "Admin")" class="btn btn-warning"><i class="fa-sharp fa-solid fa-square-plus"></i>&nbsp; Add New Product</a>
+
+    @*<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+            <a href="#close" title="Close" class="modal-close-btn">X</a>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body"></div>
+                </div>
+            </div>
+        </div>*@
+
+
+    @*<div class="modal" id="add-product" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">
+                            New Product
+                        </h4>
+                    </div>
+                    <div class="modal-body" id="productModalBody">
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+
+</body>

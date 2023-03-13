@@ -1,0 +1,86 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "ViewOrderDetails";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .submitbutton {
+        position: relative;
+        bottom: 34px;
+        left: 310px;
+    }
+</style>
+
+<h2>Order Summary</h2>
+
+<table class="table table-bordered table-striped">
+
+    <tr>
+        <th>Order ID</th>
+        <td>@Model.Rows[0][0]</td>
+    </tr>
+    <tr>
+        <th>Received Item ID</th>
+        <td>@Model.Rows[0][1]</td>
+    </tr>
+
+
+    <tr>
+        <th>Customer ID</th>
+        <td>@Model.Rows[0][2]</td>
+    </tr>
+
+    <tr>
+        <th>Serial Number</th>
+        <td>@Model.Rows[0][3]</td>
+    </tr>
+
+    <tr>
+        <th>Grade</th>
+        <td>@Model.Rows[0][4]</td>
+    </tr>
+
+    <tr>
+        <th>Repair Cost</th>
+        <td>@Model.Rows[0][5]</td>
+    </tr>
+
+    <tr>
+        <th>Order Date</th>
+        <td>@Model.Rows[0][6]</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>@Model.Rows[0][7]</td>
+    </tr>
+    <tr>
+        <th>Delivery Date</th>
+        <td>@Model.Rows[0][8]</td>
+    </tr>
+</table>
+<br />
+
+
+@*@using (Html.BeginForm("GetReport", "ProcessingOperations", FormMethod.Post))
+    {
+        <div>
+            <b>Enter your serial number</b> <input type="text" name="serialnumber" id="serialnumber" />
+            @Html.HiddenFor(m => Model.Rows[0][1])
+            <input type="submit" value="Get Report" name="@Model.Rows[0][1]" />
+        </div>
+        <br />
+    }*@
+
+<!--<div>-->
+@*<b>Enter your serial number</b> <input type="text" name="serialnumber" id="serialnumber" />*@
+@*@Html.HiddenFor(m => Model.Rows[0][1])
+    <input type="submit" value="Get Report"  onkeyup="GetReport(@Model.Rows[0][1])"/>*@
+
+<!--<button type="button" onclick = "location.href'@Url.Action("GetReport", "ProcessingOperation", new {@receivingId = Model.Rows[0][1] })'">Get Report</button>
+
+</div>
+<br />-->
+
+<a href="@Url.Action("GetReport", "ProcessingOperations", new { @receivingId = Model.Rows[0][1] })" class="btn btn-primary"><i class="fa-solid fa-file-export"></i>&nbsp; Get Report</a>

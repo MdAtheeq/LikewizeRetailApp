@@ -1,0 +1,190 @@
+﻿@model LikewizeRetailApp.Models.ProductDetails
+@{
+    ViewBag.Title = "UpdateProductDetails_Mst";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<body>
+
+    <h2>Update Product Details</h2>
+    <hr />
+
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    @*<script>
+        $(document).ready(function () {
+            $("ProductType").change(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetBrand","ReceivingOperations")',
+                    data: { prodType: $("#ProductType").val() },
+                    success: function (data) {
+                        $("#Brand").empty();
+                        $.each(data, function (i, brand) {
+                            $("#Brand").append('<option value="' + brand.Value + '" > ' + brand.Text + '</option>')
+                        })
+                    }
+                })
+            })
+        })
+        </script>
+
+
+        <script>
+        $(document).ready(function () {
+            $("#Brand").change(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetModel", "ReceivingOperations")',
+                    data: { prodType: $("#ProductType").val(), brand: $("#Brand").val() },
+                    success: function (data) {
+                        $("#Model").empty();
+                        $.each(data, function (i, model) {
+                            $("#Model").append('<option value="' + model.Value + '" > ' + model.Text + '</option>')
+                        })
+                    }
+                })
+            })
+        })
+        </script>*@
+
+
+
+    <script>
+    $(document).ready(function () {
+        GetBrandById($('#ProductDetailsID').val())
+
+            $('#ProductType').change(function () {
+                GetBrand($('#ProductType').val())
+            })
+            $('#Brand option').each(function () {
+                if ($(this).html() == brand) {
+                    $(this).attr('selected', 'selected');
+                }
+            })
+
+        function GetBrandById(prodId1) {
+            $.ajax({
+                    type: 'POST',
+                     url: '@Url.Action("GetBrandById","ReceivingOperations")',
+                     data: { prodID: prodId1 },
+                    success: function (data) {
+                        $("#Brand").empty();
+                        $.each(data, function (i, brand) {
+                            $("#Brand").append('<option value="' + brand.Value + '" > ' + brand.Text + '</option>')
+                        })
+                    }
+                })
+        }
+
+            function GetBrand(prodType1) {
+                 $.ajax({
+                    type: 'POST',
+                     url: '@Url.Action("GetBrand","ReceivingOperations")',
+                     data: { prodType: prodType1 },
+                    success: function (data) {
+                        $("#Brand").empty();
+                        $.each(data, function (i, brand) {
+                            $("#Brand").append('<option value="' + brand.Value + '" > ' + brand.Text + '</option>')
+                        })
+                    }
+                })
+            }
+        })
+
+    </script>
+    <script>
+         function CheckModel() {
+        var model1 = $("#Model").val();
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("CheckModel","Admin")',
+            data: { model: model1 },
+            success: function (Count) {
+                var message = $("#spanmsg");
+                if (Count == "Yes") {
+                    message.html("This model already exists");
+                    message.css("color", "red");
+                }
+                else {
+                    message.html("Valid model");
+                    message.css("color", "green");
+                }
+            }
+        })
+
+           
+        }
+
+        function PageValidation() {
+            var model1 = $("#Model").val();
+            var message = $("#spanmsg");
+            if (model1 == null || model1 == "") {
+                message.html("This field is required");
+                message.css("color", "red");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    </script>
+
+    @using (Html.BeginForm("UpdateProductDetails_Mst", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ProductDetailsID)
+
+
+
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.ProductType, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <label class="control-label col-md-2"><b>Product Type</b></label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ProductType, ViewBag.ProductTypeList as List<SelectListItem>, "-select-", new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.ProductType, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.ProductType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownListFor(model => model.Brand, ViewBag.BrandTypeList as List<SelectListItem>, "-select-", new { @class = "form-control" })*@
+
+                    @Html.DropDownListFor(model => model.Brand, new SelectList(string.Empty, "Value", "Text"), "-select-", new { @class = "form-control" })
+
+                    @*@Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownListFor(model => model.Model, new SelectList(string.Empty, "Value", "Text"), "-select-", new { @class = "form-control" })*@
+
+                    @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control", @onkeyup = "CheckModel()" } } )
+                    @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+                    <span id="spanmsg"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @*<input type="submit" value="Submit" class="btn btn-primary" />*@
+                    <button type="submit" class="btn btn-primary" onclick="return PageValidation();"><i class="fa-regular fa-floppy-disk"></i>&nbsp; Save</button>
+
+                </div>
+            </div>
+
+        </div>
+
+    }
+</body>

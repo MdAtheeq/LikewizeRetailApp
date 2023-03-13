@@ -1,0 +1,300 @@
+﻿@model LikewizeRetailApp.Models.ReceivedItems
+
+@{
+    ViewBag.Title = "UpdateDeviceDetails";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .submitbutton {
+        position: relative;
+        bottom: 34px;
+        left: 310px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#ProductType").change(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetBrand")',
+                data: { prodType: $("#ProductType").val() },
+                success: function (data) {
+                    $("#Brand").empty();
+                    $.each(data, function (i, brand) {
+                        $("#Brand").append('<option value="' + brand.Value + '" > ' + brand.Text + '</option>')
+                    })
+                }
+            })
+        })
+    })
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#Brand").change(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetModel")',
+                data: { prodType: $("#ProductType").val(), brand: $("#Brand").val() },
+                success: function (data) {
+                    $("#Model").empty();
+                    $.each(data, function (i, model) {
+                        $("#Model").append('<option value="' + model.Value + '" > ' + model.Text + '</option>')
+                    })
+                }
+            })
+        })
+    })
+</script>
+<script>
+    function ValidateSerial() {
+        var serial = $("#SerialNumber").val();
+        $.ajax({
+            type: "POST",
+            url: "/ValidateSerialMask/ValidateSerialMask",
+            data: '{serialnumber:"' + serial + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                var message = $("#spanmsg");
+                if (msg != null) {
+                    message.html(msg);
+                    message.css("color", "red");
+                }
+                else {
+                    message.html("Serial not available in SPK");
+                    message.css("color", "red");
+                }
+
+            }
+        })
+    }
+</script>
+<style>
+    span > i {
+        color: white
+    }
+
+    span > button {
+        background: none;
+        color: white;
+        padding: 0;
+        border: 0;
+    }
+
+    .submitbutton {
+        position: relative;
+        bottom: 34px;
+        left: 310px;
+    }
+</style>
+
+
+<h2>Receiving Info</h2>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+
+@using (Html.BeginForm("UpdateDeviceDetails", "ReceivingOperations", FormMethod.Post))
+{
+    <form>
+        <div>
+            <ul class="list-unstyled">
+
+
+                <li>
+                   
+                    <input class="form-control" type="text" name="email" id="email" placeholder="Enter your email"/>
+                </li>
+                <li>
+                    <button type="submit" class="btn btn-primary submitbutton"><i class="fa-brands fa-1.5x fa-searchengin"> </i></button>
+
+                </li>
+            </ul>
+            @*<button type="submit" class="btn btn-success"><i class="fa-brands fa-3x fa-searchengin"></i></button>*@
+        </div>
+        <br />
+    </form>
+}
+
+@if (ViewBag.IsSuccess != null)
+{
+    <body>
+        @using (Html.BeginForm("ReceiveItem", "ReceivingOperations", FormMethod.Post, new { @id = "Form1" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @*<h4>ReceivedItems</h4>*@
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.ReceivedItemID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ReceivedItemID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReceivedItemID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+                @Html.HiddenFor(m => m.CustomerID)
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="form-group col-12">
+                    @*@Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2"><b>Customer Name</b></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-12">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group col-12">
+                    @*@Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2"><b>Phone Number</b></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.SerialNumber, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2"><b>Serial Number</b></label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SerialNumber, new { htmlAttributes = new { @class = "form-control", @onkeyup = "ValidateSerial()" } })
+                        @Html.ValidationMessageFor(model => model.SerialNumber, "", new { @class = "text-danger" })
+                        <span id="spanmsg"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.ProductType, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <label class="control-label col-md-2"><b>Product Type</b></label>
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.ProductType, ViewBag.ProductTypeList as List<SelectListItem>, "-select-", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ProductType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Brand, new SelectList(string.Empty, "Value", "Text"), "-select-", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Model, new SelectList(string.Empty, "Value", "Text"), "-select-", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <b>Received</b> @Html.RadioButtonFor(m => m.Status, "Received")
+                            <b>Yet to be received</b> @Html.RadioButtonFor(m => m.Status, "Yet to be received")
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.DateReceived, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DateReceived, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DateReceived, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                @if (string.IsNullOrEmpty(Model.CustomerName))
+                {
+                    <p><b>There is no customer with the specified email. Please create a new customer through admin</b></p><br />
+
+                    <a href="@Url.Action("GetCustomerDetails_Mst", "Admin")" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i>&nbsp; Create New Customer</a>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Receive" class="btn btn-primary" />
+                        </div>
+                    </div>
+                }
+
+            </div>
+        }
+
+
+
+        <script type="text/javascript">
+            $("body").on("submit", "#Form1", function () {
+                var serial = $("#SerialNumber").val();
+                var prod = $("#ProductType").val();
+                var brand = $("#Brand").val();
+                var model = $("#Model").val();
+                var message = $("#spanmsg");
+
+                if (serial == "" || serial == null) {
+                    message.html("This field is required");
+                    message.css("color", "red");
+                }
+                if (serial == "" || prod == "" || brand == "" || model == "" || model == null) {
+                    alert("All fields are mandatory");
+                    return false;
+                }
+                else {
+                    var result = confirm("Do you want to submit?");
+                    if (result == true) {
+                        alert("Item Received Successfully");
+                    }
+                    else {
+                        return false;
+                    }
+                }
+               
+            
+            });
+        </script>
+
+        @*@if (ViewBag.Message != null)
+            {
+                <script type="text/javascript">
+                    window.onload = function () {
+                        alert('@ViewBag.Message');
+                    };
+                </script>
+            }*@
+
+    </body>
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+
+
+@*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">*@
+
+

@@ -1,0 +1,53 @@
+﻿@model LikewizeRetailApp.Models.Questions
+@{
+    ViewBag.Title = "UpdateQuestions_Mst";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<h2>Update Question</h2>
+
+
+
+@using (Html.BeginForm("UpdateQuestions_Mst", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.QuestionID)
+
+
+
+
+        <div>
+            <b>Question</b>
+            <div>
+                @Html.TextAreaFor(model => model.Question, new { rows = "8", cols = "25", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Question, "", new { @class = "text-danger" })
+            </div>
+        </div><br />
+
+
+
+
+        <div>
+            <b>Category</b>
+            <div>
+                @*@Html.EditorFor(model => model.Answer, new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.Answer, ViewBag.ProductTypeList as List<SelectListItem>, "-select-", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
+            </div>
+        </div><br />
+
+
+        <div>
+            <div>
+                @*<input type="submit" value="Submit" class="btn btn-primary" />*@
+                <button type="submit" class="btn btn-primary"><i class="fa-regular fa-floppy-disk"></i>&nbsp; Save</button>
+
+            </div>
+        </div>
+
+    </div>
+
+}

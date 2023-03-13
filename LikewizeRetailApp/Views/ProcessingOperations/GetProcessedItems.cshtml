@@ -1,0 +1,128 @@
+﻿@model System.Data.DataSet
+@{
+    ViewBag.Title = "GetProcessedItems";
+}
+@using System.Data
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .submitbutton {
+        position: relative;
+        bottom: 34px;
+        left: 310px;
+    }
+</style>
+
+<h2>Get Processed Items</h2>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    function myFunction() {
+        var result = confirm("Do you want to confirm this order?");
+        if (result == true) {
+            alert("Order Placed Successfully");
+        }
+        else {
+            event.stopPropagation();
+            event.preventDefault();
+            
+        }
+    }
+</script>
+
+
+@using (Html.BeginForm("GetProcessedItems", "ProcessingOperations", FormMethod.Post))
+{
+    <div>
+        <input type="text" name="serialnumber" id="serialnumber" class="form-control" placeholder="Enter your serial number"/>
+        <button type="submit" class="btn btn-primary submitbutton"><i class="fa-brands fa-1.5x fa-searchengin"></i></button>
+    </div>
+    <br />
+}
+
+@if (ViewBag.IsSuccess != null)
+{
+    if (Model.Tables.Count > 0)
+    {
+
+        <b>Customer Info</b>
+        <br />
+        <table class="table table-bordered table-striped">
+
+            <tr>
+                <th>Customer Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+            </tr>
+
+            @foreach (DataRow row in Model.Tables[0].Rows)
+            {
+                <tr>
+                    <td>@row["CustomerName"]</td>
+                    <td>@row["Email"]</td>
+                    <td>@row["PhoneNumber"]</td>
+
+                </tr>
+            }
+
+
+        </table>
+        <br />
+
+        <b>Product Info</b>
+        <br />
+        <table class="table table-bordered table-striped">
+
+            <tr>
+                <th>Product Type</th>
+                <th>Brand</th>
+                <th>Model</th>
+            </tr>
+
+            @foreach (DataRow row in Model.Tables[1].Rows)
+            {
+                <tr>
+                    <td>@row["ProductType"]</td>
+                    <td>@row["Brand"]</td>
+                    <td>@row["Model"]</td>
+
+                </tr>
+            }
+
+
+        </table>
+        <br />
+
+        <b>Grading Info</b>
+        <br />
+        <table class="table table-bordered table-striped">
+
+            <tr>
+                <th>Serial Number</th>
+                <th>Grade</th>
+                <th>Repair Cost</th>
+            </tr>
+
+            @foreach (DataRow row in Model.Tables[2].Rows)
+            {
+                <tr>
+                    <td>@row["SerialNumber"]</td>
+                    <td>@row["Grade"]</td>
+                    <td>@row["RepairCost"]</td>
+
+                </tr>
+            }
+
+
+        </table>
+        <br />
+
+        <center><a href="@Url.Action("PlaceOrder", "ProcessingOperations", new { @receivingId = @Model.Tables[3].Rows[0][0], @serialnumber = Model.Tables[2].Rows[0][0] })" onclick="myFunction(); " class="btn btn-primary"><i class="fa-solid fa-check"></i>&nbsp; Confirm Order</a></center>
+
+
+
+    }
+                else
+                {
+                    <b>Serial not found</b>
+                }
+}

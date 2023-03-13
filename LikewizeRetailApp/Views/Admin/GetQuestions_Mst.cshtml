@@ -1,0 +1,127 @@
+﻿@model IPagedList<LikewizeRetailApp.Models.Questions>
+@{
+    ViewBag.Title = "GetQuestions_Mst";
+}
+<body>
+    <h2>Questions</h2>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+
+                $("#modal-container").remove();
+
+                $.get($(this).data("targeturl"), function (data) {
+
+                    $('<div id="modal-container" class="modal fade">' + '<div class="modal-dialog" id="modaldialog">' +
+                        '<div class="modal-content" id= "modalbody" >' +
+                        data + '</div></div>').modal();
+
+                });
+            });
+        });
+
+    </script>
+    <style>
+        .modal-content {
+            padding: 10px;
+        }
+    </style>
+
+    @using PagedList
+    @using PagedList.Mvc
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .submitbutton {
+            position: relative;
+            bottom: 34px;
+            left: 310px;
+        }
+    </style>
+
+    @using (Html.BeginForm("GetQuestions_Mst", "Admin", new { id=1}, FormMethod.Get))
+    {
+        <div>
+            <b>Select a category: </b>
+            <div>
+                @Html.DropDownList("ProductType", new SelectList(ViewBag.ProductTypeList, "Text", "Value"), "--select--", new { @class = "form-control" })
+
+                @*@Html.DropDownListFor(m => m, ViewBag.Category as List<SelectListItem>, "--Select--");*@
+                @*<select name="productType" id="productType" class="form-control">
+                        <option value="Mobile">Mobile</option>
+                        <option value="Tablet">Tablet</option>
+                        <option value="Laptop">Laptop</option>
+
+                    </select>*@
+            </div>
+            <button type="submit" class="btn btn-primary submitbutton"><i class="fa-brands fa-1.5x fa-searchengin"></i></button>
+        </div>
+    }
+
+    <br />
+    @if (Model.Count > 0)
+    {
+        <table class="table table-bordered table-striped">
+            <tr>
+
+                <th>Question ID</th>
+                <th>Question</th>
+                <th>Category</th>
+
+
+
+                <th>Action</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.QuestionID</td>
+
+                    <td> @item.Question</td>
+
+                    <td>@item.Answer</td>
+
+
+
+                    <td>
+                        @*<button type="button" class="btn btn-info modal-link" data-targeturl="@Url.Action("UpdateQuestions_Mst","Admin", new {@questID= item.QuestionID})"><i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit</button>  |*@
+
+                        <a href="@Url.Action("UpdateQuestions_Mst","Admin", new { @questId = item.QuestionID })" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit</a>  |
+                        <a href="@Url.Action("DeleteQuestions_Mst","Admin", new { @questId = item.QuestionID })" class="btn btn-danger"><i class="fa-solid fa-trash"></i> &nbsp; Delete</a>
+                    </td>
+
+                </tr>
+
+            }
+
+
+        </table>
+
+        <center>@Html.PagedListPager(Model, id => Url.Action("GetQuestions_Mst", "Admin", new { id, ProductType = Request.QueryString["ProductType"] }))</center>
+
+        @*<button type="button" class="btn btn-warning modal-link" data-targeturl="@Url.Action("CreateQuestions_Mst","Admin")"><i class="fa-sharp fa-solid fa-square-plus"></i>&nbsp; Add New Question</button>*@
+        @*<br />
+            <br />*@
+
+
+        <a href="@Url.Action("CreateQuestions_Mst", "Admin")" class="btn btn-warning"><i class="fa-sharp fa-solid fa-square-plus"></i>&nbsp; Add New Question</a>
+    }
+            else
+            {
+                <p><b>Select a valid category</b></p>
+            }
+
+
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <a href="#close" title="Close" class="modal-close-btn">X</a>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+</body>

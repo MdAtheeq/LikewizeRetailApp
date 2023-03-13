@@ -1,0 +1,113 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "GetReceivedItems";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .submitbutton {
+        position: relative;
+        bottom: 34px;
+        left: 310px;
+    }
+</style>
+
+<h2>Get Received Items</h2>
+@*<link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .input-icons i {
+            position: absolute;
+        }
+
+        .input-icons {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            padding: 10px;
+            min-width: 40px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>*@
+
+
+@using (Html.BeginForm("GetReceivedItems", "ProcessingOperations", FormMethod.Post))
+{
+    <div>
+        <input type="text" name="serialnumber" id="serialnumber" class="form-control" placeholder="Enter your serial number" />
+        <button type="submit" class="btn btn-primary submitbutton"><i class="fa-brands fa-1.5x fa-searchengin"></i></button>
+    </div>
+    <br />
+}
+@if (ViewBag.IsSuccess != null)
+{
+    if (Model.Rows.Count > 0)
+    {
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                @*<th>Received Item ID</th>
+                     <th>Customer ID</th>
+                    <th>Product Details ID</th>*@
+                <th>Serial Number</th>
+                <th>Receiving Status</th>
+                <th>Date Received</th>
+                <th>Action</th>
+            </tr>
+            @for (int i = 0; i < Model.Rows.Count; i++)
+            {
+                <tr>
+                    @*<td>@Model.Rows[i][0]</td>
+                        <td>@Model.Rows[i][1]</td>
+                        <td>@Model.Rows[i][2]</td>*@
+                    <td>@Model.Rows[i][3]</td>
+                    <td>@Model.Rows[i][4]</td>
+                    <td>@Model.Rows[i][5]</td>
+
+                    @*<td><img src="@Url.Content(@Model.Rows[i][3].ToString())" , width="150" height="100" /></td>*@
+
+                    @if (Model.Rows[i][4].ToString() == "Received")
+                    {
+                        <td>
+                            <a href="@Url.Action("EvaluateSerial", "ProcessingOperations", new { @serialnumber = Model.Rows[i][3], @prodId = Model.Rows[i][2], @receivingId = Model.Rows[i][0] })" class="btn btn-primary"><i class="fa-solid fa-list-check"></i>&nbsp; Process this serial</a>
+                        </td>
+                        @*<td>
+                                <p>This product is under process</p>
+                            </td>*@
+                    }
+                    else
+                    {
+                        <td>This order is yet to be received </td>
+
+
+                    }
+
+
+
+                </tr>
+            }
+
+
+
+
+        </table>
+    }
+
+
+
+
+
+    else
+    {
+        <p>Serial number not found</p>
+        <br />
+        @*<a href="@Url.Action("NewSerialRequest", "ReceivingOperations")">Place order request for a new serial</a>*@
+    }
+}

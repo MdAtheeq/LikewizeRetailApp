@@ -1,0 +1,68 @@
+﻿@model LikewizeRetailApp.Models.CustomerDetails
+@{
+    ViewBag.Title = "UpdateCustomerDetails_Mst";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<h2>&nbsp; Update Customer Details</h2>
+<hr />
+<script src="~/Scripts/Custom.js"></script>
+
+
+@using (Html.BeginForm("UpdateCustomerDetails_Mst", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CustomerDetailsID)
+
+
+
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2"><b>Customer Name</b></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                <span id="spanmsg1"></span>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @onkeyup = "CheckEmail()" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <span id="spanmsg"></span>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2"><b>Phone Number</b></label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                <span id="spanmsg3"></span>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary" onclick="return PageValidation();"><i class="fa-regular fa-floppy-disk"></i>&nbsp; Save</button>
+
+                @*<input type="submit" value="Save" class="btn btn-primary" />*@
+            </div>
+        </div>
+
+    </div>
+
+}

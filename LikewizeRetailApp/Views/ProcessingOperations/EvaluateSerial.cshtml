@@ -1,0 +1,87 @@
+﻿@model List<LikewizeRetailApp.Models.Questions>
+@{
+    ViewBag.Title = "EvaluateSerial";
+}
+@using LikewizeRetailApp.Models
+<script>
+
+
+    function PageValidation() {
+        var Count = 0;
+        //var td = document.getElementById('td');
+        //var tdcount = td.childElementCount;
+        var tcount = 0;
+        //tdcount = tdcount + 1;
+        //var bcount = $('#tbl').find('#td').length;
+        $("#tr").each(function () {
+            if ($(this).attr("id") == "td1") {
+                tcount = tcount + 1;
+            }
+            
+        })
+        console.log(tcount);
+        if (Count == tcount) {
+            return true;
+        }
+        else {
+            alert("Please answer all the questions");
+            return false;
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    }
+</script>
+
+<h2>Processing Operations</h2>
+<hr />
+<body>
+    <div class="container" style="border: 1px solid black">
+
+        <h2 class="text-center">Evaluate Serial</h2>
+
+        @using (Html.BeginForm("GetGrade", "ProcessingOperations", FormMethod.Post))
+        {
+            <center>
+                <div>
+                    <div>
+                        <b>Serial Number: @ViewData["SerialNumber"]</b>
+
+                    </div>
+                    <br />
+
+                    <table id="tbl">
+                        <tr>
+                            <th>Questions</th>
+                            <th>Response</th>
+                        </tr>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr style="height:30px",id="td1">
+                                <td style="width:350px">
+                                    @Html.HiddenFor(m => m[i].QuestionID)
+                                    <b>@Model[i].Question</b>
+                                    @Html.HiddenFor(m => m[i].Question)
+                                </td>
+
+                                
+                                <td>
+                                    @Html.RadioButtonFor(m => m[i].Answer, "Yes", new { id = "id" })<b>Yes</b> &nbsp;
+                                    @Html.RadioButtonFor(m => m[i].Answer, "No", new { id = "id" })<b>No</b>
+                                </td>
+                                
+                            </tr>
+                        }
+                    </table><br />
+                    <div>
+
+                        <div>
+
+                            <input type="submit" value="Next" class="btn btn-primary" onclick="return PageValidation();"/>
+                        </div>
+                    </div><br />
+
+                </div>
+            </center>
+         }
+    </div>
+</body>

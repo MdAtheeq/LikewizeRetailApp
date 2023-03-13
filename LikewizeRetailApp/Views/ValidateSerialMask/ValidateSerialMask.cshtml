@@ -1,0 +1,46 @@
+﻿@model LikewizeRetailApp.Models.Validate_Serial_Mask.ValidateSerialMask
+@{
+    ViewBag.Title = "ValidateSerialMask";
+}
+
+<h2>Validate Serial Mask</h2>
+@using (Html.BeginForm("ValidateSerialMask", "ValidateSerialMask", FormMethod.Post))
+{
+
+    <div>
+
+
+        <div>
+            <b>Enter Company ID</b>
+            <div>
+                @Html.TextBoxFor(m => m.CpnyID, new { @class = "form-control" })
+            </div> 
+
+            <b>Enter Inventory ID</b>
+            <div>
+                @Html.TextBoxFor(m => m.InvtID, new { @class = "form-control" })
+            </div> 
+            <b>Enter Serial Number</b>
+            <div>
+                @Html.TextBoxFor(m => m.SerialNumber, new { @class = "form-control" })
+            </div> 
+            <b>Select Transaction Type</b>
+            <div>
+                @Html.TextBoxFor(m => m.TranType, new { @class = "form-control" })
+            </div> 
+            <b>Enter Pallet Number</b>
+            <div>
+                @Html.TextBoxFor(m => m.PalletNumber, new { @class = "form-control" })
+            </div> 
+        </div>
+
+        <button type="submit" class="btn btn-primary">Validate</button>
+    </div>
+
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+                <b>@ViewBag.ErrorMessage</b>
+}
+else { }

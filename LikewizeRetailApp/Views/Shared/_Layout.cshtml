@@ -1,0 +1,133 @@
+﻿@{
+    bool isLoggedIn = true;
+    if (string.IsNullOrWhiteSpace(User.Identity.Name))
+    {
+        isLoggedIn = false;
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+</head>
+
+
+
+
+<body>
+    <nav class="navbar navbar-default background-headercolor">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand fontcolor-header" href="#">Likewize Retail</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle fontcolor-header" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu fontcolor-header">
+                            <li><a href="@Url.Action("GetCustomerDetails_Mst", "Admin")">Customer Details</a></li>
+                            <li><a href="@Url.Action("GetProductDetails_Mst", "Admin", new {id = 1})">Product Details</a></li>
+                            <li><a href="@Url.Action("GetQuestions_Mst", "Admin", new {id=1})">Questions</a></li>
+                            @*<li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li>
+                                    <a href="#">One more separated link</a>
+                                </li>*@
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle fontcolor-header" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Retail Menu
+                            <span class="caret fontcolor-header"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("GetSerialDetails", "ReceivingOperations")">Receiving</a></li>
+                            <li><a href="@Url.Action("GetReceivedItems", "ProcessingOperations")">Inspection</a></li>
+                            <li><a href="@Url.Action("GetProcessedItems", "ProcessingOperations")">Work Order Creation</a></li>
+                            @*<li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li>
+                                    <a href="#" class="fontcolor-header">One more separated link</a>
+                                </li>*@
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle fontcolor-header" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Reports
+                            <span class="caret fontcolor-header"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("GetBrands", "Reports")">Total Brands</a></li>
+                            <li><a href="@Url.Action("GetReceivedBrandByDate", "Reports")">Received Brands</a></li>
+
+                        </ul>
+                    <li>@Html.ActionLink("Order History", "GetOrders", "ProcessingOperations")</li>
+                    @{
+                        if (isLoggedIn)
+                        {
+                            <li>@Html.ActionLink(User.Identity.Name, "StartupPage", "ReceivingOperations")</li>
+
+                            <li>@Html.ActionLink("Signout", "Signout", "Accounts")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Login", "Login", "Accounts")</li>
+                            <li>@Html.ActionLink("Signup", "Signup", "Accounts")</li>
+                        }
+                    }
+
+
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+    @*<script src="~/Scripts/Custom.js"></script>*@
+    
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+        $('.dropdown-toggle').click(function (e) {
+            if ($(document).width() > 768) {
+                e.preventDefault(); var url = $(this).attr('href');
+                if (url !== '#') {
+                    window.location.href = url;
+                }
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>

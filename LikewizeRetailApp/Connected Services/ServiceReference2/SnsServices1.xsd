@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://uat-spk-emea.brightstar.com/SNSServices/SnsServices.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" />
+  <xs:import schemaLocation="https://uat-spk-emea.brightstar.com/SNSServices/SnsServices.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="https://uat-spk-emea.brightstar.com/SNSServices/SnsServices.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Brightstar.SNS.BusinessLayer" />
+  <xs:element name="MD_PRODUCT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="descr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="prodclassid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serialized" type="xs:boolean" />
+        <xs:element minOccurs="0" name="serializedIn" type="xs:boolean" />
+        <xs:element minOccurs="0" name="serializedOut" type="xs:boolean" />
+        <xs:element minOccurs="0" name="upcCode" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serialmask" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_PRODUCTResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_PRODUCTResult" nillable="true" type="q1:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_PRODUCT_DELETE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_PRODUCT_DELETEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_PRODUCT_DELETEResult" nillable="true" type="q2:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_ITEMGROUP_DELETE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="prodclassid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_ITEMGROUP_DELETEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_ITEMGROUP_DELETEResult" nillable="true" type="q3:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_WAREHOUSE_DELETE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="siteId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_WAREHOUSE_DELETEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_WAREHOUSE_DELETEResult" nillable="true" type="q4:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_BOM_HEADER">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bomid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="descr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="finishGood" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_BOM_HEADERResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_BOM_HEADERResult" nillable="true" type="q5:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_BOM_DETAIL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bomid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="finishGood" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lineNbr" type="xs:decimal" />
+        <xs:element minOccurs="0" name="componentId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="qty" type="xs:decimal" />
+        <xs:element minOccurs="0" name="perseries" type="xs:decimal" />
+        <xs:element minOccurs="0" name="bomRecId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_BOM_DETAILResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_BOM_DETAILResult" nillable="true" type="q6:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_BOM_DETAIL_DELETE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bomid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="finishGood" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lineNbr" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_BOM_DETAIL_DELETEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_BOM_DETAIL_DELETEResult" nillable="true" type="q7:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_ITEMGROUP">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="prodClassId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="descr" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_ITEMGROUPResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_ITEMGROUPResult" nillable="true" type="q8:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_WAREHOUSE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="erpsiteid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="siteId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="descr" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_WAREHOUSEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_WAREHOUSEResult" nillable="true" type="q9:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CREATE_PRODUCTION_ORDER_HEADER">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="woNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="finishGood" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bomId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="siteFinish" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="warehouse" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="whselocFinish" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="systemId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="qty" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="refNbr" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CREATE_PRODUCTION_ORDER_HEADERResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="CREATE_PRODUCTION_ORDER_HEADERResult" nillable="true" type="q10:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CREATE_PRODUCTION_ORDER_DETAIL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="woNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lotId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lineNbr" type="xs:decimal" />
+        <xs:element minOccurs="0" name="qty" type="xs:decimal" />
+        <xs:element minOccurs="0" name="bomId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="perseries" type="xs:decimal" />
+        <xs:element minOccurs="0" name="bomRecId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CREATE_PRODUCTION_ORDER_DETAILResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="CREATE_PRODUCTION_ORDER_DETAILResult" nillable="true" type="q11:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECID">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="woNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lotId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lineNbr" type="xs:decimal" />
+        <xs:element minOccurs="0" name="qty" type="xs:decimal" />
+        <xs:element minOccurs="0" name="bomId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="perseries" type="xs:decimal" />
+        <xs:element minOccurs="0" name="bomRecId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECIDResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECIDResult" nillable="true" type="q12:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DELETE_LINE_SERIALNBR">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="docnbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="trantype" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="refnbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lineref" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DELETE_LINE_SERIALNBRResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="DELETE_LINE_SERIALNBRResult" nillable="true" type="q13:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VERIFY_LINE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="docnbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="trantype" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="refnbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lineref" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="siteId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="warehouse" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="whseloc" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="system" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tositeid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="towarehouse" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="towhseloc" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="qty" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VERIFY_LINEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="VERIFY_LINEResult" nillable="true" type="q14:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CANCEL_PORcpt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="docnbr" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CANCEL_PORcptResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="CANCEL_PORcptResult" nillable="true" type="q15:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VERIFY_PORcpt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="docnbr" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VERIFY_PORcptResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="VERIFY_PORcptResult" nillable="true" type="q16:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="POSTED_TRANSACTION">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="docnbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="trantype" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="POSTED_TRANSACTIONResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="POSTED_TRANSACTIONResult" nillable="true" type="q17:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VERIFY_QTYTOT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="docnbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="trantype" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="qty" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VERIFY_QTYTOTResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="VERIFY_QTYTOTResult" nillable="true" type="q18:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertTransdetail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tranTypeId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="docNbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="refNbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lineRef" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="siteid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="warehouse" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="whseloc" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="qtytot" nillable="true" type="xs:decimal" />
+        <xs:element minOccurs="0" name="qty" nillable="true" type="xs:decimal" />
+        <xs:element minOccurs="0" name="transtatus" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="systemid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tositeid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="towarehouse" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="towhseloc" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertTransdetailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="InsertTransdetailResult" nillable="true" type="q19:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Validate_Serial_Status">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lotsernbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="siteid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="whseloc" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="trantypeid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tranbehaviour" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtmult" nillable="true" type="xs:short" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Validate_Serial_StatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="Validate_Serial_StatusResult" nillable="true" type="q20:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Sns_Wrk_Rescan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="batNbrIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="refNbrIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lineRefIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="wrksId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Sns_Wrk_RescanResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="Sns_Wrk_RescanResult" nillable="true" type="q21:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SNS_Wrk_IN_OUT_INS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="p_cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_InOutFlagIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_ModuleIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_TranTypeIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_BatNbrIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_RefNbrIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LineRefIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_InvtIDIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LotSerNbrIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_EntityIDIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_MstBoxNbrIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LotSerNbrAlt1In" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LotSerNbrAlt2In" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LotSerNbrAlt3In" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LotSerNbrAlt4In" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LotSerNbrAlt5In" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LotSerNbrAlt6In" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LotSerNbrAlt7In" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LotSerNbrAlt8In" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_LotSerNbrHexIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_ComputerNameIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_ScrnNbrIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_UserIDIn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_AccessNbr" nillable="true" type="xs:short" />
+        <xs:element minOccurs="0" name="p_SiteID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_Whseloc" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_Pallet" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_linenbr" type="xs:int" />
+        <xs:element minOccurs="0" name="p_KitId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_WorkOrder" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="p_MfgrLotSerNbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="P_ExpDate" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SNS_Wrk_IN_OUT_INSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="SNS_Wrk_IN_OUT_INSResult" nillable="true" type="q22:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Sns_Transfer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="transfer" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Sns_TransferResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="Sns_TransferResult" nillable="true" type="q23:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="XBS_SendChangeOfPartNbrReceiptToWarehouse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="journalID" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="XBS_SendChangeOfPartNbrReceiptToWarehouseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="XBS_SendChangeOfPartNbrReceiptToWarehouseResult" nillable="true" type="q24:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GET_TRANPERWAREHOUSE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="trantypeid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="siteid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GET_TRANPERWAREHOUSEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="GET_TRANPERWAREHOUSEResult" nillable="true" type="q25:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GET_LINE_SERIALNBR">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="docnbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="trantype" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="refnbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lineref" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GET_LINE_SERIALNBRResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="GET_LINE_SERIALNBRResult" nillable="true" type="q26:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GET_DO_NUMBER">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serialNumber" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GET_DO_NUMBERResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="GET_DO_NUMBERResult" nillable="true" type="q27:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CREATE_DISASSEMBLY_ORDER_HEADER">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="woNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="finishGood" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="bomId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="siteFinish" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="warehouse" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="whselocFinish" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="systemId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="qty" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CREATE_DISASSEMBLY_ORDER_HEADERResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="CREATE_DISASSEMBLY_ORDER_HEADERResult" nillable="true" type="q28:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CREATE_DISASSEMBLY_ORDER_DETAIL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="refNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="erpLineRef" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="erpDocRef" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lineNbr" type="xs:decimal" />
+        <xs:element minOccurs="0" name="ItemAttribute1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="qty" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CREATE_DISASSEMBLY_ORDER_DETAILResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="CREATE_DISASSEMBLY_ORDER_DETAILResult" nillable="true" type="q29:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_TAC_CODES">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strxml" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_TAC_CODESResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_TAC_CODESResult" nillable="true" type="q30:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_TAC_CODE_DELETE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serialstarnbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serialendnbr" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MD_TAC_CODE_DELETEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MD_TAC_CODE_DELETEResult" nillable="true" type="q31:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WORK_ORDER_PIX_UPDATE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="xmldata" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WORK_ORDER_PIX_UPDATEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="WORK_ORDER_PIX_UPDATEResult" nillable="true" type="q32:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SNS_ENTRY_GATE_MH">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Module" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="KeyID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SiteID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Whseloc" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LineRef" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Serials" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SNS_ENTRY_GATE_MHResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="SNS_ENTRY_GATE_MHResult" nillable="true" type="q33:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UPDATE_OFFLINE_SERIALIZED_TRANSACTIONS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strXML" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UPDATE_OFFLINE_SERIALIZED_TRANSACTIONSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="UPDATE_OFFLINE_SERIALIZED_TRANSACTIONSResult" nillable="true" type="q34:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GET_SPK_ENQUIRY">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="strXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GET_SPK_ENQUIRYResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="GET_SPK_ENQUIRYResult">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidateSerialMask">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lotSerNo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tranType" type="xs:int" />
+        <xs:element minOccurs="0" name="lPNNo" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidateSerialMaskResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="ValidateSerialMaskResult" nillable="true" type="q35:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsSerialized">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="tranType" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsSerializedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="IsSerializedResult" nillable="true" type="q36:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOutboundAttributes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strXML" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateOutboundAttributesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="UpdateOutboundAttributesResult" nillable="true" type="q37:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MHPixUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strXML" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MHPixUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MHPixUpdateResult" nillable="true" type="q38:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SyncUnWaveSerials">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="serials" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="docnbr" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lpn" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SyncUnWaveSerialsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="SyncUnWaveSerialsResult" nillable="true" type="q39:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MHiLPNCreation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ItemAttribute1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LPNNumber" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="InvAdjustmentQty" nillable="true" type="xs:string" />
+        <xs:element xmlns:q40="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SerialNbr" nillable="true" type="q40:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MHiLPNCreationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="MHiLPNCreationResult" nillable="true" type="q41:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SCIMEIValidation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cpnyid" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="imei1" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="imei2" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="invtId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SCIMEIValidationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="SCIMEIValidationResult" nillable="true" type="q42:SCReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SerialSwapping">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/Brightstar.SNS.BusinessLayer" minOccurs="0" name="SerialDetails" nillable="true" type="q43:ArrayOfSwappingSerials" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SerialSwappingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" minOccurs="0" name="SerialSwappingResult" nillable="true" type="q44:ReturnStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

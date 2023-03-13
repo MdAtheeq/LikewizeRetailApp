@@ -1,0 +1,139 @@
+﻿@model List<LikewizeRetailApp.Models.Questions>
+@{
+    ViewBag.Title = "GetGrade";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $("body").on("submit", "#Form1", function () {
+        var RepairCost = $("#RepairCost").val();
+        var message = $("#spanmsg");
+        if (RepairCost != "" && RepairCost != null) {
+            var result = confirm("Do you want to submit?");
+            if (result == true) {
+                alert("Item Processed Successfully");
+            }
+            else {
+                return false;
+            }
+
+        }
+        else {
+            message.html("This field is required");
+            message.css("color", "red");
+            return false;
+        }
+    });
+</script>
+
+<h2>Processing Operations</h2>
+<hr />
+
+<body>
+
+    <div class="container" style="border: 1px solid black">
+        <h2 class="text-center">Grading Details</h2>
+
+
+
+
+        @using (Html.BeginForm("CompleteProcessing", "ProcessingOperations", FormMethod.Post, new { @id = "Form1" }))
+        {
+
+            <center>
+                <div>
+                    <div>
+                        <b>Serial Number: @ViewData["SerialNumber"]</b>
+                        @*<div>
+                                @Html.TextBoxFor(m => ViewData["SerialNumber"], new {@class = "form-control"})
+                            </div>*@
+                    </div>
+                    <br />
+
+                    @*@foreach (var item in Model)
+                        {
+                            <div>
+                                @Html.HiddenFor(m => item.QuestionID)
+                                <b>@item.Question</b>
+                                <div>
+                                    <b>Yes</b> @Html.RadioButtonFor(m => item.Answer, "Yes") &nbsp;
+                                    <b>No</b> @Html.RadioButtonFor(m => item.Answer, "No")
+                                </div>
+                            </div><br />
+
+
+
+
+                        }*@
+                    <table>
+
+
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr style="height:30px">
+                                <td style="width:350px">
+                                    @Html.HiddenFor(m => m[i].QuestionID)
+                                    <b>@Model[i].Question</b>
+                                </td>
+
+                                <td>
+                                    @Html.RadioButtonFor(m => m[i].Answer, "Yes", new {@onclick = "javascript: return false;" })<b>Yes</b> &nbsp;
+                                    @Html.RadioButtonFor(m => m[i].Answer, "No", new { @onclick = "javascript: return false;" })<b>No</b>
+                                </td>
+
+
+
+
+                            </tr>
+
+                        }
+                        <tr>
+                            <td><b>Grade</b></td>
+                            <td>
+                                @Html.RadioButtonFor(m => ViewData["Grade"], "A")<b>A</b> &nbsp;
+                                @Html.RadioButtonFor(m => ViewData["Grade"], "B")<b>B</b> &nbsp;
+                                @Html.RadioButtonFor(m => ViewData["Grade"], "C")<b>C</b>
+                                @*@Html.TextBoxFor(m => ViewData["Grade"])*@
+                            </td>
+                        </tr>
+
+
+                        <tr>
+
+                            <td><b>Repair Cost</b></td>
+                            <td>
+                                @Html.TextBoxFor(m => ViewData["RepairCost"], new { @class = "form-control", @id = "RepairCost" })
+                                <span id="spanmsg"></span>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <div>
+
+                        <div>
+
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                        </div>
+                    </div><br />
+                </div>
+
+
+            </center>
+
+        }
+
+
+
+        @*if (ViewBag.Message != null)
+            {
+            <script type="text/javascript">
+                    window.onload = function () {
+                        alert('@ViewBag.Message');
+                    };
+            </script>
+            }*@
+
+    </div>
+
+</body>
+

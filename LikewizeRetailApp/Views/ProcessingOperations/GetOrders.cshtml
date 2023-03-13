@@ -1,0 +1,48 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "GetOrders";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .submitbutton {
+        position: relative;
+        bottom: 34px;
+        left: 310px;
+    }
+</style>
+
+<h2>Get Orders</h2>
+
+
+@if (Model.Rows.Count > 0)
+{
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Order ID</th>
+            <th>Received Item ID</th>
+            <th>Serial Number</th>
+            <th>Order Date</th>
+            <th>Status</th>
+            <th>Delivery Date</th>
+
+
+            <th>Action</th>
+        </tr>
+        @for (int i = 0; i < Model.Rows.Count; i++)
+        {
+            <tr>
+                <td>@Model.Rows[i][0]</td>
+                <td>@Model.Rows[i][1]</td>
+                <td>@Model.Rows[i][2]</td>
+                <td>@Model.Rows[i][3]</td>
+                <td>@Model.Rows[i][4]</td>
+                <td>@Model.Rows[i][5]</td>
+                <td><a href="@Url.Action("ViewOrderDetails", "ProcessingOperations", new { @receivingId = Model.Rows[i][1] })" class="btn btn-info"><i class="fa-sharp fa-solid fa-circle-info"></i>&nbsp; View Details</a></td>
+
+            </tr>
+        }
+    </table>
+}

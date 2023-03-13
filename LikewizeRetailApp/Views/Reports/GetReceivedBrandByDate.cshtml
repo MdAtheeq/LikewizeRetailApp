@@ -1,0 +1,102 @@
+﻿@model IEnumerable<LikewizeRetailApp.Models.BrandReport.BrandReport>
+@{
+    ViewBag.Title = "GetReceivedBrandByDate";
+}
+
+<h2>Get Received Brands By Date</h2>
+
+@using (Html.BeginForm("GetReceivedBrandByDate", "Reports", FormMethod.Post)) { }
+
+
+
+    <div>
+        <b>Select a date</b><br />
+
+        <div>
+            <input type="date" id="idate" name="date"><button type="button" class="btn btn-primary" id="datebtn">Get Graph</button>
+        </div>
+    </div><br />
+
+
+
+@*@if (ViewBag.IsSuccess != null)
+{
+
+    <input id="ID" value="Get Graph" type="button" />
+    <br />
+    <br />
+
+}*@
+
+
+
+<div>
+    <canvas id="myChart1"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#datebtn").click(function () {
+            var inputdate = $("#idate").val();
+            $.ajax({
+                type: 'POST',
+                url: "/Reports/GetReceivedBrandChartByDate",
+                data: '{date:"' + inputdate + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: OnSuccessResult,
+                error: OnError
+
+            });
+
+            function OnSuccessResult(data) {
+                var _data = data;
+
+                var _chartLabels = _data.map(x => x.Brand);
+                var _chartData = _data.map(x => x.Count);
+
+
+                var grapharea = document.getElementById('myChart1').getContext("2d");
+                //const ctx = document.getElementById('myChart1');
+                let chartStatus = Chart.getChart("myChart1");
+                if (chartStatus != undefined) { chartStatus.destroy(); }
+
+                var myChart = new Chart(grapharea, {
+                    type: "bar",
+                    data: {
+                        label: 'Brand Count',
+                        labels: _chartLabels,
+                        datasets: [{
+                            backgroundColor: "Blue",
+                            data: _chartData
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+
+                });
+
+
+
+
+            }
+
+            function OnError(err) {
+
+            }
+        })
+    })
+        
+
+
+
+</script>

@@ -1,0 +1,217 @@
+﻿@model IPagedList<LikewizeRetailApp.Models.CustomerDetails>
+@{
+    ViewBag.Title = "GetCustomerDetails_Mst";
+}
+@{
+    int val = 0;
+}
+<body class="body-content">
+    <h2>Customer Details</h2>
+    @using PagedList.Mvc;
+    @using PagedList;
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .submitbutton {
+            position: relative;
+            bottom: 34px;
+            left: 310px;
+        }
+    </style>
+
+    @using (Html.BeginForm("GetCustomerDetails_Mst", "Admin", FormMethod.Post))
+    {
+        <div>
+            <input class="form-control" type="text" name="email" id="email" placeholder="Enter your email" />
+            <button type="submit" class="btn btn-primary submitbutton"><i class="fa-brands fa-1.5x fa-searchengin"></i></button>
+            @*<button type="submit" class="btn btn-success"><i class="fa-brands fa-3x fa-searchengin"></i></button>*@
+        </div>
+        <br />
+    }
+
+    <br />
+    @if (Model.Count > 0)
+    {
+        <table class="table table-bordered table-striped">
+            <tr>
+
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+
+
+                <th>Action</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CustomerDetailsID</td>
+
+                    <td> @item.CustomerName</td>
+
+                    <td>@item.Email</td>
+
+                    <td>@item.PhoneNumber</td>
+
+                    <td>
+                        <a href="@Url.Action("UpdateCustomerDetails_Mst", "Admin", new {@custID = item.CustomerDetailsID})" class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit</a>  |
+                        @*<a href="#" class="btn btn-info" id="editTag" name="@item.CustomerDetailsID" onclick="GetVal()"><i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit</a>  |*@
+                        @*<button type="button" class="btn btn-info modal-link" data-targeturl="@Url.Action("UpdateCustomerDetails_Mst","Admin", new {@custID= item.CustomerDetailsID})"><i class="fa-solid fa-pen-to-square"></i>&nbsp; Edit</button>  |*@
+                        @*<button type="button" class="btn btn-danger btn-sm" onclick="@Url.Action("DeleteCustomerDetails_Mst","Admin", new {@custID= item.CustomerDetailsID})"><i class="fa-solid fa-trash"></i> &nbsp; Delete</button>*@
+
+                        <a href="@Url.Action("DeleteCustomerDetails_Mst", "Admin", new { @custId = item.CustomerDetailsID })" class="btn btn-danger"><i class="fa-solid fa-trash"></i> &nbsp; Delete</a>
+                    </td>
+
+                </tr>
+
+            }
+
+
+        </table>
+
+        <center>@Html.PagedListPager(Model, id => Url.Action("GetCustomerDetails_Mst", "Admin", new { id }))</center>
+        <a href="@Url.Action("CreateCustomerDetails_Mst", "Admin")" class="btn btn-warning"><i class="fa-solid fa-user-plus"></i>&nbsp; Add New Customer</a>
+            <br /><br />
+        @*<button type="button" class="btn btn-warning modal-link" data-targeturl="@Url.Action("CreateCustomerDetails_Mst","Admin")"><i class="fa-solid fa-user-plus"></i>&nbsp; Add New Customer</button><br /><br />*@
+
+        @*<a href="#" class="btn btn-warning" data-toggle="modal" data-target="#addCustomer"><i class="fa-solid fa-user-plus"></i>&nbsp; Add New Customer</a>
+            <div class="modal fade" id="addCustomer">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Add New Customer</h2>
+                        </div>
+                        <div class="modal-body">
+                            @Html.Action("CreateCustomerDetails_Mst", "Admin")
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+
+
+
+
+        <!--<div class="modal fade" id="editCustomer">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Edit Customer</h2>
+                    </div>
+                    <div class="modal-body">-->
+
+        @*@Html.Action("UpdateCustomerDetails_Mst", "Admin", new {@custID = val})*@
+
+        <!--<div id="anchor">-->
+        @*<div id="divId">
+
+            </div>*@
+        <!--</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+
+
+
+
+
+
+
+    }
+
+    else
+    {
+        <p><b>Customer Not Found</b></p>
+        <br />
+        @*<button type="button" class="btn btn-warning modal-link" data-targeturl="@Url.Action("CreateCustomerDetails_Mst","Admin")"><i class="fa-solid fa-user-plus"></i>&nbsp; Add New Customer</button><br /><br />*@
+
+        <a href="@Url.Action("CreateCustomerDetails_Mst", "Admin")" class="btn btn-warning"><i class="fa-solid fa-user-plus"></i>&nbsp; Add New Customer</a>
+    }
+
+
+
+    @*<script>
+
+            var value;
+            function GetVal() {
+                value = document.getElementById("editTag").getAttribute("name");
+                GetDetails(value);
+
+            }
+
+            function GetDetails(value1) {
+
+                console.log(value1);
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/UpdateCustomerDetails_Mst?custID=" + value1,
+                    success: OnSuccessResult,
+                    error: OnError
+                })
+
+                function OnSuccessResult(data) {
+                    console.log(data);
+                    var href = $(data).attr("name");
+                    console.log(href);
+
+                    var x = jQuery.parseHTML(data);
+
+                    console.log(x);
+                    $('.body-content').load(data);
+                }
+
+                function OnError() {
+
+                }
+            }
+
+
+
+        </script>*@
+
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <a href="#close" title="Close" class="modal-close-btn">X</a>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+
+                $("#modal-container").remove();
+
+                $.get($(this).data("targeturl"), function (data) {
+
+                    $('<div id="modal-container" class="modal fade">' + '<div class="modal-dialog" id="modaldialog">' +
+                        '<div class="modal-content" id= "modalbody" >' +
+                        data + '</div></div>').modal();
+
+                });
+            });
+        });
+
+    </script>
+    <style>
+        .modal-content {
+            padding: 10px;
+        }
+
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+    </style>
+
+
+</body>

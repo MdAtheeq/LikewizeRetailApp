@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="SnsServices" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpBinding_ISnsServices_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://uat-spk-emea.brightstar.com/SNSServices/SnsServices.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://uat-spk-emea.brightstar.com/SNSServices/SnsServices.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://uat-spk-emea.brightstar.com/SNSServices/SnsServices.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Brightstar.SNS.Entities" />
+      <xsd:import schemaLocation="https://uat-spk-emea.brightstar.com/SNSServices/SnsServices.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="https://uat-spk-emea.brightstar.com/SNSServices/SnsServices.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Brightstar.SNS.BusinessLayer" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISnsServices_MD_PRODUCT_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_PRODUCT" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_PRODUCT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_PRODUCTResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_PRODUCT_DELETE_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_PRODUCT_DELETE" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_PRODUCT_DELETE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_PRODUCT_DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_ITEMGROUP_DELETE_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_ITEMGROUP_DELETE" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_ITEMGROUP_DELETE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_ITEMGROUP_DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_WAREHOUSE_DELETE_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_WAREHOUSE_DELETE" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_WAREHOUSE_DELETE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_WAREHOUSE_DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_BOM_HEADER_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_BOM_HEADER" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_BOM_HEADER_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_BOM_HEADERResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_BOM_DETAIL_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_BOM_DETAIL" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_BOM_DETAIL_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_BOM_DETAILResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_BOM_DETAIL_DELETE_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_BOM_DETAIL_DELETE" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_BOM_DETAIL_DELETE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_BOM_DETAIL_DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_ITEMGROUP_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_ITEMGROUP" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_ITEMGROUP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_ITEMGROUPResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_WAREHOUSE_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_WAREHOUSE" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_WAREHOUSE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_WAREHOUSEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CREATE_PRODUCTION_ORDER_HEADER_InputMessage">
+    <wsdl:part name="parameters" element="tns:CREATE_PRODUCTION_ORDER_HEADER" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CREATE_PRODUCTION_ORDER_HEADER_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CREATE_PRODUCTION_ORDER_HEADERResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CREATE_PRODUCTION_ORDER_DETAIL_InputMessage">
+    <wsdl:part name="parameters" element="tns:CREATE_PRODUCTION_ORDER_DETAIL" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CREATE_PRODUCTION_ORDER_DETAIL_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CREATE_PRODUCTION_ORDER_DETAILResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECID_InputMessage">
+    <wsdl:part name="parameters" element="tns:CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECID" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_DELETE_LINE_SERIALNBR_InputMessage">
+    <wsdl:part name="parameters" element="tns:DELETE_LINE_SERIALNBR" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_DELETE_LINE_SERIALNBR_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DELETE_LINE_SERIALNBRResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_VERIFY_LINE_InputMessage">
+    <wsdl:part name="parameters" element="tns:VERIFY_LINE" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_VERIFY_LINE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VERIFY_LINEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CANCEL_PORcpt_InputMessage">
+    <wsdl:part name="parameters" element="tns:CANCEL_PORcpt" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CANCEL_PORcpt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CANCEL_PORcptResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_VERIFY_PORcpt_InputMessage">
+    <wsdl:part name="parameters" element="tns:VERIFY_PORcpt" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_VERIFY_PORcpt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VERIFY_PORcptResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_POSTED_TRANSACTION_InputMessage">
+    <wsdl:part name="parameters" element="tns:POSTED_TRANSACTION" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_POSTED_TRANSACTION_OutputMessage">
+    <wsdl:part name="parameters" element="tns:POSTED_TRANSACTIONResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_VERIFY_QTYTOT_InputMessage">
+    <wsdl:part name="parameters" element="tns:VERIFY_QTYTOT" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_VERIFY_QTYTOT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VERIFY_QTYTOTResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_InsertTransdetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertTransdetail" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_InsertTransdetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertTransdetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_Validate_Serial_Status_InputMessage">
+    <wsdl:part name="parameters" element="tns:Validate_Serial_Status" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_Validate_Serial_Status_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Validate_Serial_StatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_Sns_Wrk_Rescan_InputMessage">
+    <wsdl:part name="parameters" element="tns:Sns_Wrk_Rescan" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_Sns_Wrk_Rescan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Sns_Wrk_RescanResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_SNS_Wrk_IN_OUT_INS_InputMessage">
+    <wsdl:part name="parameters" element="tns:SNS_Wrk_IN_OUT_INS" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_SNS_Wrk_IN_OUT_INS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SNS_Wrk_IN_OUT_INSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_Sns_Transfer_InputMessage">
+    <wsdl:part name="parameters" element="tns:Sns_Transfer" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_Sns_Transfer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Sns_TransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_XBS_SendChangeOfPartNbrReceiptToWarehouse_InputMessage">
+    <wsdl:part name="parameters" element="tns:XBS_SendChangeOfPartNbrReceiptToWarehouse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_XBS_SendChangeOfPartNbrReceiptToWarehouse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:XBS_SendChangeOfPartNbrReceiptToWarehouseResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_GET_TRANPERWAREHOUSE_InputMessage">
+    <wsdl:part name="parameters" element="tns:GET_TRANPERWAREHOUSE" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_GET_TRANPERWAREHOUSE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GET_TRANPERWAREHOUSEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_GET_LINE_SERIALNBR_InputMessage">
+    <wsdl:part name="parameters" element="tns:GET_LINE_SERIALNBR" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_GET_LINE_SERIALNBR_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GET_LINE_SERIALNBRResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_GET_DO_NUMBER_InputMessage">
+    <wsdl:part name="parameters" element="tns:GET_DO_NUMBER" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_GET_DO_NUMBER_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GET_DO_NUMBERResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CREATE_DISASSEMBLY_ORDER_HEADER_InputMessage">
+    <wsdl:part name="parameters" element="tns:CREATE_DISASSEMBLY_ORDER_HEADER" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CREATE_DISASSEMBLY_ORDER_HEADER_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CREATE_DISASSEMBLY_ORDER_HEADERResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CREATE_DISASSEMBLY_ORDER_DETAIL_InputMessage">
+    <wsdl:part name="parameters" element="tns:CREATE_DISASSEMBLY_ORDER_DETAIL" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_CREATE_DISASSEMBLY_ORDER_DETAIL_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CREATE_DISASSEMBLY_ORDER_DETAILResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_TAC_CODES_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_TAC_CODES" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_TAC_CODES_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_TAC_CODESResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_TAC_CODE_DELETE_InputMessage">
+    <wsdl:part name="parameters" element="tns:MD_TAC_CODE_DELETE" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MD_TAC_CODE_DELETE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MD_TAC_CODE_DELETEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_WORK_ORDER_PIX_UPDATE_InputMessage">
+    <wsdl:part name="parameters" element="tns:WORK_ORDER_PIX_UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_WORK_ORDER_PIX_UPDATE_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WORK_ORDER_PIX_UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_SNS_ENTRY_GATE_MH_InputMessage">
+    <wsdl:part name="parameters" element="tns:SNS_ENTRY_GATE_MH" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_SNS_ENTRY_GATE_MH_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SNS_ENTRY_GATE_MHResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_UPDATE_OFFLINE_SERIALIZED_TRANSACTIONS_InputMessage">
+    <wsdl:part name="parameters" element="tns:UPDATE_OFFLINE_SERIALIZED_TRANSACTIONS" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_UPDATE_OFFLINE_SERIALIZED_TRANSACTIONS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UPDATE_OFFLINE_SERIALIZED_TRANSACTIONSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_GET_SPK_ENQUIRY_InputMessage">
+    <wsdl:part name="parameters" element="tns:GET_SPK_ENQUIRY" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_GET_SPK_ENQUIRY_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GET_SPK_ENQUIRYResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_ValidateSerialMask_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateSerialMask" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_ValidateSerialMask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateSerialMaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_IsSerialized_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsSerialized" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_IsSerialized_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsSerializedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_UpdateOutboundAttributes_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOutboundAttributes" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_UpdateOutboundAttributes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateOutboundAttributesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MHPixUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:MHPixUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MHPixUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MHPixUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_SyncUnWaveSerials_InputMessage">
+    <wsdl:part name="parameters" element="tns:SyncUnWaveSerials" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_SyncUnWaveSerials_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SyncUnWaveSerialsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MHiLPNCreation_InputMessage">
+    <wsdl:part name="parameters" element="tns:MHiLPNCreation" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_MHiLPNCreation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MHiLPNCreationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_SCIMEIValidation_InputMessage">
+    <wsdl:part name="parameters" element="tns:SCIMEIValidation" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_SCIMEIValidation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SCIMEIValidationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_SerialSwapping_InputMessage">
+    <wsdl:part name="parameters" element="tns:SerialSwapping" />
+  </wsdl:message>
+  <wsdl:message name="ISnsServices_SerialSwapping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SerialSwappingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ISnsServices">
+    <wsdl:operation name="MD_PRODUCT">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_PRODUCT" message="tns:ISnsServices_MD_PRODUCT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_PRODUCTResponse" message="tns:ISnsServices_MD_PRODUCT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MD_PRODUCT_DELETE">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_PRODUCT_DELETE" message="tns:ISnsServices_MD_PRODUCT_DELETE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_PRODUCT_DELETEResponse" message="tns:ISnsServices_MD_PRODUCT_DELETE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MD_ITEMGROUP_DELETE">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_ITEMGROUP_DELETE" message="tns:ISnsServices_MD_ITEMGROUP_DELETE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_ITEMGROUP_DELETEResponse" message="tns:ISnsServices_MD_ITEMGROUP_DELETE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MD_WAREHOUSE_DELETE">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_WAREHOUSE_DELETE" message="tns:ISnsServices_MD_WAREHOUSE_DELETE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_WAREHOUSE_DELETEResponse" message="tns:ISnsServices_MD_WAREHOUSE_DELETE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MD_BOM_HEADER">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_BOM_HEADER" message="tns:ISnsServices_MD_BOM_HEADER_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_BOM_HEADERResponse" message="tns:ISnsServices_MD_BOM_HEADER_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MD_BOM_DETAIL">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_BOM_DETAIL" message="tns:ISnsServices_MD_BOM_DETAIL_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_BOM_DETAILResponse" message="tns:ISnsServices_MD_BOM_DETAIL_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MD_BOM_DETAIL_DELETE">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_BOM_DETAIL_DELETE" message="tns:ISnsServices_MD_BOM_DETAIL_DELETE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_BOM_DETAIL_DELETEResponse" message="tns:ISnsServices_MD_BOM_DETAIL_DELETE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MD_ITEMGROUP">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_ITEMGROUP" message="tns:ISnsServices_MD_ITEMGROUP_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_ITEMGROUPResponse" message="tns:ISnsServices_MD_ITEMGROUP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MD_WAREHOUSE">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_WAREHOUSE" message="tns:ISnsServices_MD_WAREHOUSE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_WAREHOUSEResponse" message="tns:ISnsServices_MD_WAREHOUSE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CREATE_PRODUCTION_ORDER_HEADER">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/CREATE_PRODUCTION_ORDER_HEADER" message="tns:ISnsServices_CREATE_PRODUCTION_ORDER_HEADER_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/CREATE_PRODUCTION_ORDER_HEADERResponse" message="tns:ISnsServices_CREATE_PRODUCTION_ORDER_HEADER_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CREATE_PRODUCTION_ORDER_DETAIL">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/CREATE_PRODUCTION_ORDER_DETAIL" message="tns:ISnsServices_CREATE_PRODUCTION_ORDER_DETAIL_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/CREATE_PRODUCTION_ORDER_DETAILResponse" message="tns:ISnsServices_CREATE_PRODUCTION_ORDER_DETAIL_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECID">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECID" message="tns:ISnsServices_CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECIDResponse" message="tns:ISnsServices_CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_LINE_SERIALNBR">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/DELETE_LINE_SERIALNBR" message="tns:ISnsServices_DELETE_LINE_SERIALNBR_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/DELETE_LINE_SERIALNBRResponse" message="tns:ISnsServices_DELETE_LINE_SERIALNBR_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VERIFY_LINE">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/VERIFY_LINE" message="tns:ISnsServices_VERIFY_LINE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/VERIFY_LINEResponse" message="tns:ISnsServices_VERIFY_LINE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CANCEL_PORcpt">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/CANCEL_PORcpt" message="tns:ISnsServices_CANCEL_PORcpt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/CANCEL_PORcptResponse" message="tns:ISnsServices_CANCEL_PORcpt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VERIFY_PORcpt">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/VERIFY_PORcpt" message="tns:ISnsServices_VERIFY_PORcpt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/VERIFY_PORcptResponse" message="tns:ISnsServices_VERIFY_PORcpt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="POSTED_TRANSACTION">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/POSTED_TRANSACTION" message="tns:ISnsServices_POSTED_TRANSACTION_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/POSTED_TRANSACTIONResponse" message="tns:ISnsServices_POSTED_TRANSACTION_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VERIFY_QTYTOT">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/VERIFY_QTYTOT" message="tns:ISnsServices_VERIFY_QTYTOT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/VERIFY_QTYTOTResponse" message="tns:ISnsServices_VERIFY_QTYTOT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertTransdetail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/InsertTransdetail" message="tns:ISnsServices_InsertTransdetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/InsertTransdetailResponse" message="tns:ISnsServices_InsertTransdetail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Validate_Serial_Status">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/Validate_Serial_Status" message="tns:ISnsServices_Validate_Serial_Status_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/Validate_Serial_StatusResponse" message="tns:ISnsServices_Validate_Serial_Status_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Sns_Wrk_Rescan">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/Sns_Wrk_Rescan" message="tns:ISnsServices_Sns_Wrk_Rescan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/Sns_Wrk_RescanResponse" message="tns:ISnsServices_Sns_Wrk_Rescan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SNS_Wrk_IN_OUT_INS">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/SNS_Wrk_IN_OUT_INS" message="tns:ISnsServices_SNS_Wrk_IN_OUT_INS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/SNS_Wrk_IN_OUT_INSResponse" message="tns:ISnsServices_SNS_Wrk_IN_OUT_INS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Sns_Transfer">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/Sns_Transfer" message="tns:ISnsServices_Sns_Transfer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/Sns_TransferResponse" message="tns:ISnsServices_Sns_Transfer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="XBS_SendChangeOfPartNbrReceiptToWarehouse">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/XBS_SendChangeOfPartNbrReceiptToWarehouse" message="tns:ISnsServices_XBS_SendChangeOfPartNbrReceiptToWarehouse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/XBS_SendChangeOfPartNbrReceiptToWarehouseResponse" message="tns:ISnsServices_XBS_SendChangeOfPartNbrReceiptToWarehouse_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_TRANPERWAREHOUSE">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/GET_TRANPERWAREHOUSE" message="tns:ISnsServices_GET_TRANPERWAREHOUSE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/GET_TRANPERWAREHOUSEResponse" message="tns:ISnsServices_GET_TRANPERWAREHOUSE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_LINE_SERIALNBR">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/GET_LINE_SERIALNBR" message="tns:ISnsServices_GET_LINE_SERIALNBR_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/GET_LINE_SERIALNBRResponse" message="tns:ISnsServices_GET_LINE_SERIALNBR_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_DO_NUMBER">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/GET_DO_NUMBER" message="tns:ISnsServices_GET_DO_NUMBER_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/GET_DO_NUMBERResponse" message="tns:ISnsServices_GET_DO_NUMBER_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CREATE_DISASSEMBLY_ORDER_HEADER">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/CREATE_DISASSEMBLY_ORDER_HEADER" message="tns:ISnsServices_CREATE_DISASSEMBLY_ORDER_HEADER_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/CREATE_DISASSEMBLY_ORDER_HEADERResponse" message="tns:ISnsServices_CREATE_DISASSEMBLY_ORDER_HEADER_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CREATE_DISASSEMBLY_ORDER_DETAIL">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/CREATE_DISASSEMBLY_ORDER_DETAIL" message="tns:ISnsServices_CREATE_DISASSEMBLY_ORDER_DETAIL_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/CREATE_DISASSEMBLY_ORDER_DETAILResponse" message="tns:ISnsServices_CREATE_DISASSEMBLY_ORDER_DETAIL_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MD_TAC_CODES">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_TAC_CODES" message="tns:ISnsServices_MD_TAC_CODES_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_TAC_CODESResponse" message="tns:ISnsServices_MD_TAC_CODES_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MD_TAC_CODE_DELETE">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MD_TAC_CODE_DELETE" message="tns:ISnsServices_MD_TAC_CODE_DELETE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MD_TAC_CODE_DELETEResponse" message="tns:ISnsServices_MD_TAC_CODE_DELETE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="WORK_ORDER_PIX_UPDATE">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/WORK_ORDER_PIX_UPDATE" message="tns:ISnsServices_WORK_ORDER_PIX_UPDATE_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/WORK_ORDER_PIX_UPDATEResponse" message="tns:ISnsServices_WORK_ORDER_PIX_UPDATE_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SNS_ENTRY_GATE_MH">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/SNS_ENTRY_GATE_MH" message="tns:ISnsServices_SNS_ENTRY_GATE_MH_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/SNS_ENTRY_GATE_MHResponse" message="tns:ISnsServices_SNS_ENTRY_GATE_MH_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_OFFLINE_SERIALIZED_TRANSACTIONS">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/UPDATE_OFFLINE_SERIALIZED_TRANSACTIONS" message="tns:ISnsServices_UPDATE_OFFLINE_SERIALIZED_TRANSACTIONS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/UPDATE_OFFLINE_SERIALIZED_TRANSACTIONSResponse" message="tns:ISnsServices_UPDATE_OFFLINE_SERIALIZED_TRANSACTIONS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GET_SPK_ENQUIRY">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/GET_SPK_ENQUIRY" message="tns:ISnsServices_GET_SPK_ENQUIRY_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/GET_SPK_ENQUIRYResponse" message="tns:ISnsServices_GET_SPK_ENQUIRY_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSerialMask">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/ValidateSerialMask" message="tns:ISnsServices_ValidateSerialMask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/ValidateSerialMaskResponse" message="tns:ISnsServices_ValidateSerialMask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSerialized">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/IsSerialized" message="tns:ISnsServices_IsSerialized_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/IsSerializedResponse" message="tns:ISnsServices_IsSerialized_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOutboundAttributes">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/UpdateOutboundAttributes" message="tns:ISnsServices_UpdateOutboundAttributes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/UpdateOutboundAttributesResponse" message="tns:ISnsServices_UpdateOutboundAttributes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MHPixUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MHPixUpdate" message="tns:ISnsServices_MHPixUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MHPixUpdateResponse" message="tns:ISnsServices_MHPixUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncUnWaveSerials">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/SyncUnWaveSerials" message="tns:ISnsServices_SyncUnWaveSerials_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/SyncUnWaveSerialsResponse" message="tns:ISnsServices_SyncUnWaveSerials_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MHiLPNCreation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/MHiLPNCreation" message="tns:ISnsServices_MHiLPNCreation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/MHiLPNCreationResponse" message="tns:ISnsServices_MHiLPNCreation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SCIMEIValidation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/SCIMEIValidation" message="tns:ISnsServices_SCIMEIValidation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/SCIMEIValidationResponse" message="tns:ISnsServices_SCIMEIValidation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SerialSwapping">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISnsServices/SerialSwapping" message="tns:ISnsServices_SerialSwapping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISnsServices/SerialSwappingResponse" message="tns:ISnsServices_SerialSwapping_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ISnsServices" type="tns:ISnsServices">
+    <wsp:PolicyReference URI="#BasicHttpBinding_ISnsServices_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="MD_PRODUCT">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_PRODUCT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MD_PRODUCT_DELETE">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_PRODUCT_DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MD_ITEMGROUP_DELETE">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_ITEMGROUP_DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MD_WAREHOUSE_DELETE">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_WAREHOUSE_DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MD_BOM_HEADER">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_BOM_HEADER" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MD_BOM_DETAIL">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_BOM_DETAIL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MD_BOM_DETAIL_DELETE">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_BOM_DETAIL_DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MD_ITEMGROUP">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_ITEMGROUP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MD_WAREHOUSE">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_WAREHOUSE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CREATE_PRODUCTION_ORDER_HEADER">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/CREATE_PRODUCTION_ORDER_HEADER" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CREATE_PRODUCTION_ORDER_DETAIL">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/CREATE_PRODUCTION_ORDER_DETAIL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECID">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/CREATE_PRODUCTION_ORDER_DETAIL_NOBOMRECID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DELETE_LINE_SERIALNBR">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/DELETE_LINE_SERIALNBR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VERIFY_LINE">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/VERIFY_LINE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CANCEL_PORcpt">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/CANCEL_PORcpt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VERIFY_PORcpt">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/VERIFY_PORcpt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="POSTED_TRANSACTION">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/POSTED_TRANSACTION" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VERIFY_QTYTOT">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/VERIFY_QTYTOT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertTransdetail">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/InsertTransdetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Validate_Serial_Status">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/Validate_Serial_Status" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sns_Wrk_Rescan">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/Sns_Wrk_Rescan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SNS_Wrk_IN_OUT_INS">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/SNS_Wrk_IN_OUT_INS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Sns_Transfer">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/Sns_Transfer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XBS_SendChangeOfPartNbrReceiptToWarehouse">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/XBS_SendChangeOfPartNbrReceiptToWarehouse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_TRANPERWAREHOUSE">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/GET_TRANPERWAREHOUSE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_LINE_SERIALNBR">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/GET_LINE_SERIALNBR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_DO_NUMBER">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/GET_DO_NUMBER" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CREATE_DISASSEMBLY_ORDER_HEADER">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/CREATE_DISASSEMBLY_ORDER_HEADER" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CREATE_DISASSEMBLY_ORDER_DETAIL">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/CREATE_DISASSEMBLY_ORDER_DETAIL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MD_TAC_CODES">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_TAC_CODES" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MD_TAC_CODE_DELETE">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MD_TAC_CODE_DELETE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WORK_ORDER_PIX_UPDATE">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/WORK_ORDER_PIX_UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SNS_ENTRY_GATE_MH">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/SNS_ENTRY_GATE_MH" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPDATE_OFFLINE_SERIALIZED_TRANSACTIONS">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/UPDATE_OFFLINE_SERIALIZED_TRANSACTIONS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GET_SPK_ENQUIRY">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/GET_SPK_ENQUIRY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSerialMask">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/ValidateSerialMask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSerialized">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/IsSerialized" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOutboundAttributes">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/UpdateOutboundAttributes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MHPixUpdate">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MHPixUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncUnWaveSerials">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/SyncUnWaveSerials" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MHiLPNCreation">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/MHiLPNCreation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SCIMEIValidation">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/SCIMEIValidation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SerialSwapping">
+      <soap:operation soapAction="http://tempuri.org/ISnsServices/SerialSwapping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SnsServices">
+    <wsdl:port name="BasicHttpBinding_ISnsServices" binding="tns:BasicHttpBinding_ISnsServices">
+      <soap:address location="https://uat-spk-emea.brightstar.com/SNSServices/SnsServices.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

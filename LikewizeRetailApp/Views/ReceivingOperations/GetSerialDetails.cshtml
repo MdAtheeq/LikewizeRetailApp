@@ -1,0 +1,73 @@
+﻿@model System.Data.DataTable
+@{
+    ViewBag.Title = "GetSerialDetails";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .submitbutton {
+        position: relative;
+        bottom: 34px;
+        left: 310px;
+    }
+</style>
+
+<h2>Get Serial History</h2>
+
+@using (Html.BeginForm("GetSerialDetails", "ReceivingOperations", FormMethod.Post))
+{
+    <div>
+        <input type="search" name="serialnumber" id="serialnumber" class="form-control" placeholder="Enter your serial number" />
+        <button type="submit" class="btn btn-primary submitbutton"><i class="fa-brands fa-1.5x fa-searchengin"></i></button>
+    </div>
+    <br />
+}
+<hr />
+@if (ViewBag.IsSuccess != null)
+{
+
+    if (Model.Rows.Count > 0)
+    {
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                @*<th>Received Item ID</th>*@
+                <th>Serial Number</th>
+
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            @for (int i = 0; i < Model.Rows.Count; i++)
+            {
+                <tr>
+                    @*<td>@Model.Rows[i][0]</td>*@
+                    <td>@Model.Rows[i][1]</td>
+                    <td>@Model.Rows[i][2]</td>
+
+                    @if (Model.Rows[i][2].ToString() == "Completed")
+                    {
+                        <td><a href="@Url.Action("UpdateDeviceDetails", "ReceivingOperations"@*, new { @serialnumber = Model.Rows[i][0] }*@)">Place new order for this serial</a></td>
+                    }
+                    else
+                    {
+                        <td>This serial is currently active and so you cannot place a new order for this serial</td>
+                    }
+                    <!--<td></td>-->
+                    @*<td><img src="@Url.Content(@Model.Rows[i][3].ToString())" , width="150" height="100" /></td>*@
+                    <!--<td>
+                        <a href=" ">View Details</a>
+
+                    </td>-->
+                </tr>
+
+            }
+        </table>
+    }
+    else
+    {
+        <b>Serial not found</b>
+        <br />
+        <a href="@Url.Action("UpdateDeviceDetails", "ReceivingOperations")" class="btn btn-warning">Place order for a new serial</a>
+    }
+}
